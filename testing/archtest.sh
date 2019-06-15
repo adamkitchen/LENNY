@@ -13,7 +13,7 @@ dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Do you think I'm memi
 
 dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
 
-dialog --defaultno --title "Time Zone select" --yesno "Do you want use the default time zone(America/New_York)?.\n\nPress no for select your own time zone"  10 60 && echo "America/New_York" > tz.tmp || tzselect > tz.tmp
+dialog --defaultno --title "Time Zone select" --yesno "Do you want use the default time zone(America/Denver)?.\n\nPress no for select your own time zone"  10 60 && echo "America/Denver" > tz.tmp || tzselect > tz.tmp
 
 dialog --no-cancel --inputbox "Enter partitionsize in gb, separated by space (swap & root)." 10 60 2>psize
 
@@ -104,7 +104,7 @@ pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda &&
 
 pacman --noconfirm --needed -S dialog
 lenny() { curl -O https://raw.githubusercontent.com/adamkitchen/LENNY/master/src/lenny.sh && bash lenny.sh ;}
-dialog --title "Install Adam's Rice" --yesno "This install script will easily let you access Adam's Auto-Rice Boostrapping Scripts (LARBS) which automatically install a full Arch Linux i3-gaps desktop environment.\n\nIf you'd like to install this, select yes, otherwise select no.\n\nAdam"  15 60 && lenny
+dialog --title "Install Adam's Rice" --yesno "This install script will easily let you access Adam's Auto-Rice Boostrapping Scripts (LENNY) which automatically install a full Arch Linux i3-gaps desktop environment.\n\nIf you'd like to install this, select yes, otherwise select no.\n\nAdam"  15 60 && lenny
 ### END
 
 
