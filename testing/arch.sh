@@ -9,11 +9,11 @@ pacman -Sy --noconfirm dialog || { echo "Error at script start: Are you sure you
 
 dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "This is an Arch install script that is very rough around the edges.\n\nOnly run this script if you're a big-brane who doesn't mind deleting your entire /dev/sda drive.\n\nThis script is only really for me so I can autoinstall Arch.\n\nt. Adam"  15 60 || exit
 
-dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Do you think I'm meming? Only select yes to DELET your entire /dev/sda and reinstall Arch.\n\nTo stop this script, press no."  10 60 || exit
+dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Do you think I'm meming? Only select yes to DELETE your entire /dev/sda and reinstall Arch.\n\nTo stop this script, press no."  10 60 || exit
 
 dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
 
-dialog --defaultno --title "Time Zone select" --yesno "Do you want use the default time zone(America/New_York)?.\n\nPress no for select your own time zone"  10 60 && echo "America/New_York" > tz.tmp || tzselect > tz.tmp
+dialog --defaultno --title "Time Zone select" --yesno "Do you want use the default time zone(America/Denver)?.\n\nPress no for select your own time zone"  10 60 && echo "America/Denver" > tz.tmp || tzselect > tz.tmp
 
 dialog --no-cancel --inputbox "Enter partitionsize in gb, separated by space (swap & root)." 10 60 2>psize
 

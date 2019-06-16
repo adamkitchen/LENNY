@@ -7,9 +7,9 @@
 
 pacman -S --noconfirm dialog || { echo "Error at script start: Are you sure you're running this as the root user? Are you sure you have an internet connection?"; exit; }
 
-dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "This is an Arch install script that is very rough around the edges.\n\nOnly run this script if you're a big-brane who doesn't mind deleting your entire /dev/sda drive.\n\nThis script is only really for me so I can autoinstall Arch.\n\nt. Adam"  15 60 || exit
+dialog --defaultno --title "Last Chance to turn back" --yesno "This is an Arch install script that is very rough around the edges.\n\nOnly run this script if you're a big-brane who doesn't mind deleting your entire /dev/sda drive.\n\nThis script is only really for me so I can autoinstall Arch.\n\nt. Adam"  15 60 || exit
 
-dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Do you think I'm meming? Only select yes to DELET your entire /dev/sda and reinstall Arch.\n\nTo stop this script, press no."  10 60 || exit
+dialog --defaultno --title "Second to last chance to turn back" --yesno "Just another friendly reminder. Only select yes to DELETE your entire /dev/sda and reinstall Arch.\n\nTo stop this script, press no."  10 60 || exit
 
 dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
 
@@ -64,6 +64,7 @@ w
 EOF
 partprobe
 
+# This will make the file systems and mount them to the specific directories.
 yes | mkfs.ext4 /dev/sda4
 yes | mkfs.ext4 /dev/sda3
 yes | mkfs.ext4 /dev/sda1
@@ -75,7 +76,7 @@ mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/home
 mount /dev/sda4 /mnt/home
 
-
+# Time to install Arch on the computer
 pacstrap /mnt base base-devel
 
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -103,7 +104,7 @@ systemctl start NetworkManager
 pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman --noconfirm --needed -S dialog
-lenny() { curl -O https://raw.githubusercontent.com/adamkitchen/LENNY/master/src/lenny.sh && bash lenny.sh ;}
+lenny() { curl -O https://raw.githubusercontent.com/adamkitchen/LENNY/master/lenny.sh && bash lenny.sh ;}
 dialog --title "Install Adam's Rice" --yesno "This install script will easily let you access Adam's Auto-Rice Boostrapping Scripts (LENNY) which automatically install a full Arch Linux i3-gaps desktop environment.\n\nIf you'd like to install this, select yes, otherwise select no.\n\nAdam"  15 60 && lenny
 ### END
 
