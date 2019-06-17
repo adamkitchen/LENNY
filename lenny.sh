@@ -1,6 +1,6 @@
 #!/bin/sh
 # Adam's Auto Rice Boostrapping Script (LENNY)
-# by Adam Kitchen <adamkitchen15@gmail.com> 
+# by Adam Kitchen <adamkitchen15@gmail.com>
 # License: GNU GPLv3
 
 ### OPTIONS AND VARIABLES ###
