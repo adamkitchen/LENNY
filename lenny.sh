@@ -14,7 +14,7 @@ while getopts ":a:r:p:h" o; do case "${o}" in
 esac done
 
 # DEFAULTS:
-[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/adamkitchen/archrice.git"
+[ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/adamkitchen/archconfig.git"
 [ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/adamkitchen/LENNY/master/progs.csv"
 [ -z "$aurhelper" ] && aurhelper="yay"
 
@@ -127,6 +127,15 @@ putgitrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriti
 	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
 	}
 
+putconfigrepo() { # Downlods a gitrepo $1 and places the files in $2 only overwriting conflicts
+	dialog --infobox "Downloading and installing config files..." 4 60
+	dir=$(mktemp -d)
+	[ ! -d "$2" ] && mkdir -p "$2" && chown -R "$name:wheel" "$2"
+	chown -R "$name:wheel" "$dir"
+	sudo -u "$name" config clone --depth 1 "$1" "$dir/gitrepo" >/dev/null 2>&1 &&
+	sudo -u "$name" cp -rfT "$dir/gitrepo" "$2"
+	}
+
 serviceinit() { for service in "$@"; do
 	dialog --infobox "Enabling \"$service\"..." 4 40
 	systemctl enable "$service"
@@ -197,7 +206,8 @@ manualinstall $aurhelper || error "Failed to install AUR helper."
 installationloop
 
 # Install the dotfiles in the user's home directory
-putgitrepo "$dotfilesrepo" "/home/$name"
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+putconfigrepo "$dotfilesrepo" "/home/$name"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
 # Install the LENNY Firefox profile in ~/.mozilla/firefox/
