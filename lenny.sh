@@ -207,7 +207,7 @@ installationloop
 
 # Install the dotfiles in the user's home directory
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-putconfigrepo "$dotfilesrepo" "/home/$name"
+putconfigrepo "$dotfilesrepo" "/home/$name/.cfg"
 rm -f "/home/$name/README.md" "/home/$name/LICENSE"
 
 # Install the LENNY Firefox profile in ~/.mozilla/firefox/
